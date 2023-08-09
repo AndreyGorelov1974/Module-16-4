@@ -36,3 +36,55 @@ if (notes & DO)
 
 Где notes — это целое число, один звук нашей мелодии. Она состоит из 12 звуков и имеет вид int melody[12];*/
 
+#include <iostream>
+#include <sstream>
+
+
+enum pianoKey
+{
+	DO = 1 << 0,
+	RE = 1 << 1,
+	MI = 1 << 2,
+	FA = 1 << 3,
+	SOL = 1 << 4,
+	LA = 1 << 5,
+	SI = 1 << 6
+};
+
+
+void pianoSound(int ch)
+{
+	int sound = 1 << ch;
+
+	if (sound & DO) std::cout << "DO ";
+	else if (sound & RE)  std::cout << "RE ";
+	else if (sound & MI)  std::cout << "MI ";
+	else if (sound & FA)  std::cout << "FA ";
+	else if (sound & SOL) std::cout << "SOL ";
+	else if (sound & LA)  std::cout << "LA ";
+	else std::cout << "SI ";
+}
+
+
+int main() {
+	const int combNotes = 12;
+	std::string temp;
+	std::string combination;
+
+	for (int i = 1; i <= combNotes; ++i)
+	{
+		std::cout << "Input " << i << " combination of notes from " << combNotes << ": ";
+		std::cin >> temp;
+		combination += temp;
+	}
+
+	int i = 0;
+	while ((i < combination.length()) &&
+		(((combination[i] - '0') >= 1) && (combination[i] - '0' <= 7)))
+	{
+		pianoSound(combination[i] - '1');
+		++i;
+	}
+	if (i != combination.length())
+		std::cout << "Input notes is incorrect";
+}
