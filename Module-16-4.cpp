@@ -11,28 +11,28 @@
 Рекомендации
 Для вычленения отдельных символов-цифр из строки с нотами используйте оператор индексации строки.
 Для дальнейшей конвертации символа в строку используйте соответствующий конструктор.
-Для простоты, чтобы из индекса ноты получить саму ноту-флаг из enum, используйте оператор сдвига. 
+Для простоты, чтобы из индекса ноты получить саму ноту-флаг из enum, используйте оператор сдвига.
 Общая формула такова: 1 << индекс ноты (начинается с нуля). К примеру, 1 << 0 — битовый флаг ноты до, 1 << 6 — битовая маска ноты си.
 
 Перечисление, хранящее ноты, имеет вид:
 
-enum note 
-{ 
-    DO = 1, 
-    RE = 2, 
-    MI = 4, 
-    FA = 8, 
-    SOL = 16, 
-    LA = 32, 
-    SI = 64 
+enum note
+{
+	DO = 1,
+	RE = 2,
+	MI = 4,
+	FA = 8,
+	SOL = 16,
+	LA = 32,
+	SI = 64
 };
 
 Соответственно, когда мы проходим по всей мелодии и печатаем её на экран, очередную комбинацию (аккорд) проверяем так:
 
-if (notes & DO) 
-        { 
-            std::cout << "DO"; 
-        }
+if (notes & DO)
+		{
+			std::cout << "DO";
+		}
 
 Где notes — это целое число, один звук нашей мелодии. Она состоит из 12 звуков и имеет вид int melody[12];*/
 
@@ -52,7 +52,7 @@ enum pianoKey
 };
 
 //количество комбинаций нот
-const int combinationNotes = 12;
+const int combinationNotes = 1;
 
 //функция вывода названия ноты по её номеру
 void pianoSound(int ch)
@@ -69,7 +69,8 @@ void pianoSound(int ch)
 }
 
 
-int main() {
+int main()
+{
 	std::string temp;
 	std::string combination;
 
@@ -81,12 +82,15 @@ int main() {
 	}
 
 	int i = 0;
-	while ((i < combination.length()) &&
-		(((combination[i] - '0') >= 1) && (combination[i] - '0' <= 7)))
+	while (i < combination.length())
 	{
-		pianoSound(combination[i] - '1');
+		if (((combination[i] - '0') < 1) || ((combination[i] - '0') > 7)) {
+			std::cout << "Input notes is incorrect ";
+
+		}
+		else {
+			pianoSound(combination[i] - '1');
+		}
 		++i;
 	}
-	if (i != combination.length())
-		std::cout << "Input notes is incorrect";
 }
