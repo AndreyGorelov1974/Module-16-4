@@ -52,44 +52,49 @@ enum pianoKey
 };
 
 //количество комбинаций нот
-const int combinationNotes = 1;
+const int numberOfNoteCombinations = 1;
 
 //функция вывода названия ноты по её номеру
 void pianoSound(int ch)
 {
-	int sound = 1 << ch;
+	//создаём шаблон ноты сдвигая единичный бит на количество позиций соответствующее номеру ноты
+	int notes = 1 << ch;
 
-	if (sound & DO) std::cout << "DO ";
-	else if (sound & RE)  std::cout << "RE ";
-	else if (sound & MI)  std::cout << "MI ";
-	else if (sound & FA)  std::cout << "FA ";
-	else if (sound & SOL) std::cout << "SOL ";
-	else if (sound & LA)  std::cout << "LA ";
+	//выводи соответствующее название ноты
+	if (notes & DO) std::cout << "DO ";
+	else if (notes & RE)  std::cout << "RE ";
+	else if (notes & MI)  std::cout << "MI ";
+	else if (notes & FA)  std::cout << "FA ";
+	else if (notes & SOL) std::cout << "SOL ";
+	else if (notes & LA)  std::cout << "LA ";
 	else std::cout << "SI ";
 }
 
 
 int main()
 {
-	std::string temp;
-	std::string combination;
+	std::string combinationNotes;
+	std::string generalСombination;
 
-	for (int i = 1; i <= combinationNotes; ++i)
+	//цикл дляввода всех комбинаций нот
+	for (int i = 1; i <= numberOfNoteCombinations; ++i)
 	{
-		std::cout << "Input " << i << " combination of notes from " << combinationNotes << ": ";
-		std::cin >> temp;
-		combination += temp;
+		std::cout << "Input " << i << " combination of notes from " << numberOfNoteCombinations << ": ";
+		//ввод очередной комбинации
+		std::cin >> combinationNotes;
+		//добавление к общей комбинации
+		generalСombination += combinationNotes;
 	}
 
 	int i = 0;
-	while (i < combination.length())
+	while (i < generalСombination.length())
 	{
-		if (((combination[i] - '0') < 1) || ((combination[i] - '0') > 7)) {
+		if (((generalСombination[i] - '0') < 1) || ((generalСombination[i] - '0') > 7)) {
 			std::cout << "Input notes is incorrect ";
 
 		}
 		else {
-			pianoSound(combination[i] - '1');
+			pianoSound(generalСombination[i] - '1');
 		}
 		++i;
 	}
