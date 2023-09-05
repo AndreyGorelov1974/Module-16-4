@@ -40,7 +40,7 @@ if (notes & DO)
 #include <sstream>
 
 //создаём перечисление по степеням 2 с помощью оператора сдвига <<
-enum pianoKey
+enum note
 {
 	DO = 1 << 0,
 	RE = 1 << 1,
@@ -52,7 +52,7 @@ enum pianoKey
 };
 
 //количество комбинаций нот
-const int numberOfNoteCombinations = 1;
+const int numberOfNoteCombinations = 2;
 
 //функция вывода названия ноты по её номеру
 void pianoSound(int ch)
@@ -60,7 +60,7 @@ void pianoSound(int ch)
 	//создаём шаблон ноты сдвигая единичный бит на количество позиций соответствующее номеру ноты
 	int notes = 1 << ch;
 
-	//выводи соответствующее название ноты
+	//выводим соответствующее название ноты
 	if (notes & DO) std::cout << "DO ";
 	else if (notes & RE)  std::cout << "RE ";
 	else if (notes & MI)  std::cout << "MI ";
@@ -76,7 +76,7 @@ int main()
 	std::string combinationNotes;
 	std::string generalСombination;
 
-	//цикл дляввода всех комбинаций нот
+	//цикл для ввода всех комбинаций нот
 	for (int i = 1; i <= numberOfNoteCombinations; ++i)
 	{
 		std::cout << "Input " << i << " combination of notes from " << numberOfNoteCombinations << ": ";
@@ -87,12 +87,15 @@ int main()
 	}
 
 	int i = 0;
+	//цикл до конца общей комбинации
 	while (i < generalСombination.length())
 	{
+		//если номер ноты не попадает в диапазон 1-7
 		if (((generalСombination[i] - '0') < 1) || ((generalСombination[i] - '0') > 7)) {
-			std::cout << "Input notes is incorrect ";
-
+			//выводим сообщение об ошибке
+			std::cout << "NotNote ";
 		}
+		//иначе выводим символ соответствующей ноты
 		else {
 			pianoSound(generalСombination[i] - '1');
 		}
