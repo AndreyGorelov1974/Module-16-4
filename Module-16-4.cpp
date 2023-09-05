@@ -51,7 +51,10 @@ enum pianoKey
 	SI = 1 << 6
 };
 
+//количество комбинаций нот
+const int combinationNotes = 12;
 
+//функция вывода названия ноты по её номеру
 void pianoSound(int ch)
 {
 	int sound = 1 << ch;
@@ -67,7 +70,6 @@ void pianoSound(int ch)
 
 
 int main() {
-	const int combinationNotes = 12;
 	std::string temp;
 	std::string combination;
 
