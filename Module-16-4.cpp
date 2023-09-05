@@ -39,7 +39,7 @@ if (notes & DO)
 #include <iostream>
 #include <sstream>
 
-
+//создаём перечисление по степеням 2 с помощью оператора сдвига <<
 enum pianoKey
 {
 	DO = 1 << 0,
@@ -67,13 +67,13 @@ void pianoSound(int ch)
 
 
 int main() {
-	const int combNotes = 12;
+	const int combinationNotes = 12;
 	std::string temp;
 	std::string combination;
 
-	for (int i = 1; i <= combNotes; ++i)
+	for (int i = 1; i <= combinationNotes; ++i)
 	{
-		std::cout << "Input " << i << " combination of notes from " << combNotes << ": ";
+		std::cout << "Input " << i << " combination of notes from " << combinationNotes << ": ";
 		std::cin >> temp;
 		combination += temp;
 	}
